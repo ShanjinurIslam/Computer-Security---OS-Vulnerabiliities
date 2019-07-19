@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-void main(){  
-    int fd;  
+int main(){  
+    FILE* fd;  
     char *v[2];  
     /* Assume that /etc/zzz is an important system file,   * and it is owned by root with permission 0644.   * Before running this program, you should create   * the file /etc/zzz first. */  
-    fd = open("/etc/zzz", O_RDWR | O_APPEND);    
-    if (fd == -1) {     
+    fd = fopen("/etc/zzz","r");    
+    if (fd == NULL) {     
         printf("Cannot open /etc/zzz\n");     
         exit(0);  
     }  
@@ -20,4 +20,5 @@ void main(){
     // Execute /bin/sh  
     v[0] = "/bin/sh"; v[1] = 0;  
     execve(v[0], v, 0);        
+    return 0 ;
 }
